@@ -1,2 +1,7 @@
 terraform.exe
 avi
+*tfstate
+*tfstate.*
+terraform-course
+.terraform
+.terraform.*
