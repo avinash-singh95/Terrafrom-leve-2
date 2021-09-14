@@ -4,4 +4,7 @@ avi
 *tfstate.*
 terraform-course
 .terraform
-.terraform.*
+mykey
+*.ppk
+*.pub
+*.tfvars
