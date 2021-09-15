@@ -1,3 +1,15 @@
+
+terraform {
+  backend "s3" {
+    bucket = "serverbucket1"
+    key    = "avi/backendbucket"
+    region = "ap-south-1"
+  }
+}
+
+
+
+
 resource "aws_key_pair" "mykey" {
   key_name   = "mykey"
   public_key = file(var.PATH_TO_PUBLIC_KEY)
@@ -8,16 +20,15 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
   key_name      = aws_key_pair.mykey.key_name
 
-  provisioner "file" {
-    source      = "script.sh"
-    destination = "/tmp/script.sh"
-  }
+
+  user_data = file("script.sh")
+
   
-  connection {
-    host        = coalesce(self.public_ip, self.private_ip)
-    type        = "ssh"
-    user        = var.INSTANCE_USERNAME
-    private_key = file(var.PATH_TO_PRIVATE_KEY)
-  }
+ 
 }
 
+
+ output "instance_ip" {
+    value       = aws_instance.example.public_ip
+    
+  }
