@@ -22,3 +22,5 @@ variable "INSTANCE_USERNAME" {
   default = "ec2-user"
 }
 
+variable "vpc_cidr" {}
+
